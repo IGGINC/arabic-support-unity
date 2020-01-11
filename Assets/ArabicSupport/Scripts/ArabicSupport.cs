@@ -730,8 +730,12 @@ internal class ArabicFixerTool
                     newChar = ']';
                 else if (newChar == ']')
                     newChar = '[';
-                
-                if(numberList.Count > 0 && char.IsNumber(numberList[numberList.Count-1]) && (i>0 &&char.IsNumber(lettersFinal[i - 1])))
+                else if (newChar == '}')
+                    newChar = '{';
+                else if (newChar == '{')
+                    newChar = '}';
+
+                if (numberList.Count > 0 && char.IsNumber(numberList[numberList.Count-1]) && (i>0 &&char.IsNumber(lettersFinal[i - 1])))
                 {
                     numberList.Add(lettersFinal[i]);
                     continue;
@@ -747,11 +751,10 @@ internal class ArabicFixerTool
                 {
                     if(newChar == '#')
                     {
-                        for (int j = 1; j < numberList.Count; j++)
+                        list.Add(newChar);
+                        for (int j = 0; j < numberList.Count; j++)
                             list.Add(numberList[numberList.Count - 1 - j]);
 
-                        list.Add(newChar);
-                        list.Add(numberList[numberList.Count - 1]);
                         numberList.Clear();
                         continue;
                     }
